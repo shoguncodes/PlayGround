@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#090c19" />
+  <title>Starfall — Mage of the Emberwild</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="game-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Starfall home"><span class="brand-mark">✦</span><span>STARFALL<span class="brand-dot">.</span></span></a>
+      <div class="chapter"><span class="chapter-kicker">THE EMBERWILD</span><span class="chapter-name">Rift of the Hollow King</span></div>
+      <div class="top-right"><span class="live-dot"></span><span class="realm-label">REALM 01</span><button id="soundBtn" class="icon-btn" aria-label="Toggle sound" title="Toggle sound">♫</button><button id="pauseBtn" class="icon-btn" aria-label="Pause game" title="Pause (P)">Ⅱ</button></div>
+    </header>
+
+    <section class="game-layout">
+      <aside class="left-rail">
+        <div class="hero-card">
+          <div class="hero-card-top"><span class="tiny-label">YOUR HERO</span><span class="rank">LVL <b id="level">01</b></span></div>
+          <div class="portrait"><div class="portrait-halo"></div><div class="portrait-wizard"><i class="wizard-hat"></i><i class="wizard-face"></i><i class="wizard-beard"></i><i class="wizard-robe"></i><i class="wizard-staff">✦</i></div><span class="portrait-spark s1">✦</span><span class="portrait-spark s2">·</span></div>
+          <div class="hero-name">AUREN <span>THE STARBOUND</span></div>
+          <div class="stat-line"><span>VITALITY</span><b id="hpText">100 / 100</b></div><div class="meter hp-meter"><i id="hpFill"></i></div>
+          <div class="stat-line mana-line"><span>ARCANE</span><b id="manaText">100 / 100</b></div><div class="meter mana-meter"><i id="manaFill"></i></div>
+          <div class="xp-row"><span>EXPERIENCE</span><b id="xpText">0 / 100</b></div><div class="xp-track"><i id="xpFill"></i></div>
+          <div class="hero-divider"></div>
+          <div class="stat-pair"><span>✧ &nbsp; SHARDS</span><b id="shards">000</b></div>
+          <div class="stat-pair"><span>⚔ &nbsp; ELIMINATIONS</span><b id="kills">00</b></div>
+        </div>
+        <div class="objective-card"><div class="objective-icon">⌖</div><div><span class="tiny-label">CURRENT OBJECTIVE</span><p id="objective">Survive the rift</p><small id="objectiveSub">The hollow stirs...</small></div></div>
+        <div class="left-tip"><span class="tip-star">✦</span><span>Stay light on your feet, starbound.</span></div>
+      </aside>
+
+      <section class="arena-wrap" aria-label="Game arena">
+        <div class="arena-frame">
+          <canvas id="game" aria-label="Top-down mage battle game"></canvas>
+          <div class="arena-vignette"></div>
+          <div class="arena-top"><div class="wave-pill"><span class="wave-icon">✧</span><span>WAVE <b id="wave">01</b></span></div><div class="arena-center-note" id="arenaNote">THE RIFT IS OPEN</div><button class="map-button" id="mapBtn" title="Toggle map (M)">⌗</button></div>
+          <div class="arena-bottom"><div class="combat-feed" id="feed"><span class="feed-mark">✦</span><span id="feedText">A strange chill rolls over the clearing...</span></div><div class="enemy-count"><span class="enemy-dot"></span><b id="enemyCount">0</b><span>HOSTILES</span></div></div>
+          <div class="pause-overlay" id="pauseOverlay"><div class="pause-card"><span class="pause-glyph">Ⅱ</span><h2>TAKE A BREATH</h2><p>The rift can wait.</p><button id="resumeBtn" class="primary-btn">RESUME <span>▶</span></button><small>PRESS P TO CONTINUE</small></div></div>
+          <div class="gameover-overlay" id="gameoverOverlay"><div class="gameover-card"><span class="gameover-glyph">☠</span><p class="tiny-label">THE EMBERWILD CLAIMS ANOTHER</p><h2>YOUR LIGHT FADES</h2><div class="run-stats"><span>WAVE <b id="finalWave">01</b></span><span>ELIMINATIONS <b id="finalKills">00</b></span><span>SHARDS <b id="finalShards">000</b></span></div><button id="restartBtn" class="primary-btn">RISE AGAIN <span>↻</span></button><small>PRESS ENTER TO RETURN</small></div></div>
+          <div class="levelup-toast" id="levelToast"><span>✦</span><div><b>POWER AWAKENED</b><small>Level <i id="toastLevel">2</i> reached</small></div></div>
+        </div>
+        <div class="arena-caption"><span><i class="caption-star">✦</i> SHADOWS GATHER AT DUSK</span><span class="coords" id="coords">ASHEN MEADOWS &nbsp;·&nbsp; 00:00</span></div>
+      </section>
+
+      <aside class="right-rail">
+        <div class="skills-head"><div><span class="tiny-label">ARCANE ARTS</span><h2>Spellbook</h2></div><span class="spell-count">03 <i>/ 03</i></span></div>
+        <div class="spell-list">
+          <button class="spell-card active" data-spell="fire" aria-label="Fireball, no cooldown">
+            <span class="spell-key">1</span><span class="spell-art fire-art"><i>✦</i></span><span class="spell-info"><b>Ember bolt</b><small>STAFF FOCUS · NO COOLDOWN</small><span class="spell-desc">A quick, piercing fireball.</span></span><span class="cast-hint">CLICK</span>
+          </button>
+          <button class="spell-card" data-spell="stars" aria-label="Astral stars, 4 second cooldown">
+            <span class="spell-key">2</span><span class="spell-art star-art"><i>✧</i></span><span class="spell-info"><b>Astral stars</b><small>AREA OF EFFECT · 4 SEC</small><span class="spell-desc">A constellation strikes nearby.</span></span><span class="spell-cooldown" id="starsCd"></span>
+          </button>
+          <button class="spell-card" data-spell="meteor" aria-label="Meteor shower, 8 second cooldown">
+            <span class="spell-key">3</span><span class="spell-art meteor-art"><i>☄</i></span><span class="spell-info"><b>Meteor shower</b><small>AREA OF EFFECT · 8 SEC</small><span class="spell-desc">Call falling stars to your aim.</span></span><span class="spell-cooldown" id="meteorCd"></span>
+          </button>
+        </div>
+        <div class="spell-note"><span>✧</span><p>Keep your staff up. The dark won't wait for you to cast.</p></div>
+        <div class="controls-card"><div class="controls-title"><span>FIELD GUIDE</span><span class="guide-line"></span></div><div class="control-row"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span class="control-copy">Move</span></div><div class="control-row"><span class="keycap wide">MOUSE</span><span class="control-copy">Aim &amp; fire ember bolt</span></div><div class="control-row"><span class="keycap">2</span><span class="keycap">3</span><span class="control-copy">Cast area spells</span></div><div class="control-row"><span class="keycap">P</span><span class="control-copy">Pause the game</span></div></div>
+        <div class="relic-card"><span class="relic-icon">❋</span><div><span class="tiny-label">RELIC FOUND</span><b>WAND OF THE FIRST FLAME</b><small>Some say it remembers the stars.</small></div><span class="relic-glint">✦</span></div>
+      </aside>
+    </section>
+    <footer class="footer"><span>✦ &nbsp; A SMALL TALE OF FIRE &amp; STARDUST</span><span>MADE FOR THE BRAVE &nbsp; · &nbsp; <b>0.1.4</b></span></footer>
+  </main>
+  <div class="mobile-controls"><button id="touchCast" class="touch-spell fire-touch">✦ <span>EMBER</span></button><button id="touchStars" class="touch-spell star-touch">✧ <span>STARS</span></button><button id="touchMeteor" class="touch-spell meteor-touch">☄ <span>METEOR</span></button><div class="touch-pad"><span></span><button data-dir="up">▲</button><span></span><button data-dir="left">◀</button><span></span><button data-dir="right">▶</button><span></span><button data-dir="down">▼</button></div></div>
+  <script src="game.js"></script>
+</body>
+</html>
